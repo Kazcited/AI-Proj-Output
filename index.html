@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elon Musk — Resume</title>
+  <meta name="description" content="A minimalist, scroll-driven resume of Elon Musk's career across software, electric vehicles, spaceflight and artificial intelligence.">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+  <header class="nav">
+    <a class="nav__brand" href="#hero">Elon Musk</a>
+    <nav aria-label="Sections">
+      <ul class="nav__list">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#tesla">Tesla</a></li>
+        <li><a href="#spacex">SpaceX</a></li>
+        <li><a href="#ventures">Ventures</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Fixed background stage: stacked scenes cross-fade as sections change -->
+  <div class="stage" id="stage">
+    <div class="scene is-active" data-scene-id="hero" style="--pos: 60% 50%; --pos-m: 65% 50%;">
+      <div class="scene__media">
+        <img src="assets/hero-space.jpg" alt="Earth's curved horizon glowing against the darkness of space" fetchpriority="high" decoding="async">
+      </div>
+    </div>
+    <div class="scene" data-scene-id="tech" style="--pos: 50% 50%; --pos-m: 50% 50%;">
+      <div class="scene__media">
+        <img src="assets/tech-computing.jpg" alt="Close view of computer circuitry and illuminated server hardware" decoding="async">
+      </div>
+    </div>
+    <div class="scene" data-scene-id="tesla" style="--pos: 55% 60%; --pos-m: 62% 60%;">
+      <div class="scene__media">
+        <img src="assets/tesla.jpg" alt="A Tesla electric vehicle in side profile on a dark road" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="scene" data-scene-id="spacex" style="--pos: 60% 40%; --pos-m: 55% 40%;">
+      <div class="scene__media">
+        <img src="assets/spacex.jpg" alt="A SpaceX Falcon 9 rocket on its launch pad or in flight" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="scene" data-scene-id="ventures" style="--pos: 50% 50%; --pos-m: 50% 50%;">
+      <div class="scene__media">
+        <img src="assets/ventures.jpg" alt="Abstract view of robotics, neural technology or infrastructure engineering" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="scene" data-scene-id="closing" style="--pos: 50% 70%; --pos-m: 50% 70%;">
+      <div class="scene__media">
+        <img src="assets/closing-space.jpg" alt="Stars and a faint planetary horizon in a dark sky" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section class="section hero" id="hero" data-scene="hero" aria-labelledby="hero-title">
+      <div class="content content--hero">
+        <h1 id="hero-title" class="hero__name rise" style="--i:0">Elon Musk</h1>
+        <p class="hero__title rise" style="--i:1">Engineer and entrepreneur.<br>Chief executive of Tesla and SpaceX.</p>
+        <p class="hero__intro rise" style="--i:2">Over three decades he has founded or led companies in internet software, electric vehicles, reusable rockets, satellite communications and artificial intelligence.</p>
+        <a class="scroll-cue rise" style="--i:3" href="#profile">Scroll to begin</a>
+      </div>
+    </section>
+
+    <section class="section" id="profile" data-scene="tech" aria-labelledby="profile-title">
+      <div class="content reveal">
+        <h2 id="profile-title">Professional profile</h2>
+        <p>Born in Pretoria, South Africa, in 1971, Musk moved to Canada in 1989 and later transferred to the University of Pennsylvania, where he earned bachelor's degrees in physics and economics. He began graduate study at Stanford in 1995 but left to start his first company; he did not complete a graduate degree.</p>
+        <p>His career moves from software to hardware. He co-founded Zip2 and X.com, founded SpaceX, invested in and later led Tesla, and co-founded Neuralink, The Boring Company and xAI. His roles differ by company: founder, early investor, chairman and chief executive.</p>
+        <p>These companies are built by thousands of engineers and operators. This page records Musk's role in them, not sole credit for their results.</p>
+      </div>
+    </section>
+
+    <section class="section" id="timeline" data-scene="tech" aria-labelledby="timeline-title">
+      <div class="content content--wide">
+        <h2 id="timeline-title" class="reveal">Career timeline</h2>
+        <ol class="timeline">
+          <li class="reveal"><time datetime="1995">1995</time><p>Co-founds Zip2 with his brother Kimbal Musk, a web software company for newspapers. Compaq acquires it in 1999.</p></li>
+          <li class="reveal"><time datetime="1999">1999</time><p>Founds X.com, an online financial services company. It merges with Confinity in 2000 and becomes PayPal; eBay acquires PayPal in 2002.</p></li>
+          <li class="reveal"><time datetime="2002">2002</time><p>Founds SpaceX and serves as chief executive and chief engineer.</p></li>
+          <li class="reveal"><time datetime="2004">2004</time><p>Leads Tesla Motors' first major funding round and becomes chairman of the board. Tesla was founded in 2003 by Martin Eberhard and Marc Tarpenning.</p></li>
+          <li class="reveal"><time datetime="2008">2008</time><p>Becomes Tesla's chief executive. SpaceX's Falcon 1 becomes the first privately developed liquid-fuel rocket to reach orbit.</p></li>
+          <li class="reveal"><time datetime="2012">2012</time><p>SpaceX's Dragon becomes the first commercial spacecraft to dock with the International Space Station. Tesla begins Model S deliveries.</p></li>
+          <li class="reveal"><time datetime="2015">2015</time><p>A Falcon 9 first stage lands upright after an orbital launch. Co-founds OpenAI; he leaves its board in 2018.</p></li>
+          <li class="reveal"><time datetime="2016">2016</time><p>Co-founds Neuralink and The Boring Company.</p></li>
+          <li class="reveal"><time datetime="2017">2017</time><p>Tesla begins Model 3 deliveries, its first high-volume vehicle.</p></li>
+          <li class="reveal"><time datetime="2018">2018</time><p>Falcon Heavy launches for the first time.</p></li>
+          <li class="reveal"><time datetime="2020">2020</time><p>SpaceX's Crew Dragon Demo-2 carries NASA astronauts to the ISS, the first crewed orbital launch by a private company. Tesla begins Model Y deliveries.</p></li>
+          <li class="reveal"><time datetime="2022">2022</time><p>Completes the acquisition of Twitter, later renamed X.</p></li>
+          <li class="reveal"><time datetime="2023">2023</time><p>Announces xAI. Starship flies its first integrated test flight.</p></li>
+          <li class="reveal"><time datetime="2024">2024</time><p>Neuralink implants its first human participant. SpaceX catches a Starship Super Heavy booster with its launch tower.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--tall" id="tesla" data-scene="tesla" aria-labelledby="tesla-title">
+      <div class="content reveal">
+        <h2 id="tesla-title">Tesla</h2>
+        <p class="lead">Electric vehicles, batteries and energy storage.</p>
+        <p>Musk joined Tesla as lead investor and chairman in 2004 and became chief executive in 2008. The company was founded in 2003 by Martin Eberhard and Marc Tarpenning.</p>
+        <ul class="plain">
+          <li><strong>Vehicles.</strong> Roadster (2008), Model S (2012), Model X (2015), Model 3 (2017) and Model Y (2020).</li>
+          <li><strong>Charging.</strong> A proprietary Supercharger network, introduced in 2012.</li>
+          <li><strong>Energy.</strong> Powerwall home batteries (2015) and Megapack utility-scale storage.</li>
+          <li><strong>Manufacturing.</strong> Large-scale battery and vehicle plants, known as Gigafactories.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--tall" id="spacex" data-scene="spacex" aria-labelledby="spacex-title">
+      <div class="content reveal">
+        <h2 id="spacex-title">SpaceX</h2>
+        <p class="lead">Launch vehicles, spacecraft and reusable rockets.</p>
+        <p>Musk founded SpaceX in 2002 with the goal of lowering the cost of spaceflight. He is its chief executive and chief engineer.</p>
+        <ul class="plain">
+          <li><strong>Falcon 9 and Falcon Heavy.</strong> Partially reusable orbital rockets; first-stage boosters now land and fly again.</li>
+          <li><strong>Dragon.</strong> Cargo and crew spacecraft serving the International Space Station.</li>
+          <li><strong>Starlink.</strong> A satellite internet constellation, first launched in volume in 2019.</li>
+          <li><strong>Starship.</strong> A fully reusable launch system under development.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="ventures" data-scene="ventures" aria-labelledby="ventures-title">
+      <div class="content content--wide">
+        <h2 id="ventures-title" class="reveal">Other ventures</h2>
+        <div class="cards">
+          <article class="card reveal">
+            <h3>Neuralink</h3>
+            <p>Co-founded in 2016. Develops implantable brain-computer interfaces. Its first human implant took place in January 2024.</p>
+          </article>
+          <article class="card reveal">
+            <h3>The Boring Company</h3>
+            <p>Founded in 2016. Builds tunnels for urban transport; its Las Vegas Convention Center Loop opened in 2021.</p>
+          </article>
+          <article class="card reveal">
+            <h3>xAI</h3>
+            <p>Announced in 2023. Develops the Grok family of AI models. Corporate links between xAI, X and Musk's other companies have changed; check primary sources for the current structure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact" data-scene="ventures" aria-labelledby="impact-title">
+      <div class="content content--wide">
+        <h2 id="impact-title" class="reveal">Achievements and impact</h2>
+        <p class="reveal note">Company milestones achieved by large teams under Musk's leadership.</p>
+        <ul class="facts">
+          <li class="reveal"><strong>Reusable orbital boosters.</strong> The first upright landing of an orbital-class first stage came in December 2015; reuse is now routine on Falcon 9.</li>
+          <li class="reveal"><strong>Private crewed spaceflight.</strong> Crew Dragon Demo-2 in May 2020 restored crewed orbital launches from US soil.</li>
+          <li class="reveal"><strong>Mass-market electric cars.</strong> Model 3 and Model Y helped move electric vehicles into high-volume production.</li>
+          <li class="reveal"><strong>Satellite internet.</strong> Starlink operates the largest satellite constellation in orbit.</li>
+          <li class="reveal"><strong>Digital payments.</strong> X.com and Confinity merged into PayPal, acquired by eBay in 2002.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="closing" data-scene="closing" aria-labelledby="closing-title">
+      <div class="content reveal">
+        <h2 id="closing-title">Engineering at scale</h2>
+        <p class="lead">Each venture applies the same approach: reduce a hard problem to its physics, then build the factory that can solve it repeatedly.</p>
+        <p>Whether that approach holds for every new domain is still being tested.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="references">
+    <div class="footer__inner">
+      <h2>References</h2>
+      <p class="note">Unofficial educational resume. Verify dates and roles against primary sources before citing.</p>
+      <ul class="refs">
+        <li><a href="https://www.britannica.com/biography/Elon-Musk" target="_blank" rel="noopener">Encyclopaedia Britannica: Elon Musk</a> (biography, education, early companies)</li>
+        <li><a href="https://www.tesla.com/about" target="_blank" rel="noopener">Tesla: About</a> (company history, products)</li>
+        <li><a href="https://www.spacex.com/" target="_blank" rel="noopener">SpaceX</a> (vehicles, missions, updates)</li>
+        <li><a href="https://www.nasa.gov/" target="_blank" rel="noopener">NASA</a> (Commercial Crew and ISS cargo programs)</li>
+        <li><a href="https://neuralink.com/" target="_blank" rel="noopener">Neuralink</a></li>
+        <li><a href="https://www.boringcompany.com/" target="_blank" rel="noopener">The Boring Company</a></li>
+        <li><a href="https://x.ai/" target="_blank" rel="noopener">xAI</a></li>
+      </ul>
+      <p class="credits">Background images are loaded from <code>assets/</code>. See <code>assets/README.md</code> for required files, sources and licensing.</p>
+    </div>
+  </footer>
+</body>
+</html>

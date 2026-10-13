@@ -1,0 +1,251 @@
+/* ==========================================================================
+   Elon Musk — Resume
+   Monochrome, cinematic. One memorable thing: the background cross-fades.
+   ========================================================================== */
+
+:root {
+  --bg: #000;
+  --fg: #f1f1ef;
+  --muted: #a3a3a0;
+  --line: rgba(255, 255, 255, 0.16);
+  --line-strong: rgba(255, 255, 255, 0.4);
+  --font: "Helvetica Neue", "Neue Haas Grotesk Text Pro", "Segoe UI", Roboto, Arial, sans-serif;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --pad: clamp(1.25rem, 6vw, 6rem);
+  --py: 0px; /* parallax offset, set from script.js */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 300 1.0625rem/1.65 var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration-color: var(--line-strong); text-underline-offset: 0.25em; }
+a:hover { text-decoration-color: var(--fg); }
+:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+
+.skip-link {
+  position: fixed; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--fg); color: #000; padding: 0.6rem 1rem; text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Scroll progress ---------- */
+.progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 60; pointer-events: none; }
+.progress__bar {
+  display: block; height: 100%; background: var(--fg);
+  transform: scaleX(0); transform-origin: left;
+}
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  padding: 1.25rem var(--pad);
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+.nav__brand { text-decoration: none; font-weight: 400; letter-spacing: 0.01em; white-space: nowrap; }
+.nav nav { min-width: 0; }
+.nav__list {
+  display: flex; gap: 1.75rem; margin: 0; padding: 0; list-style: none;
+  font-size: 0.8125rem; letter-spacing: 0.02em;
+  overflow-x: auto; scrollbar-width: none;
+}
+.nav__list::-webkit-scrollbar { display: none; }
+.nav__list a {
+  display: block; padding: 0.4rem 0; white-space: nowrap; text-decoration: none;
+  color: var(--muted); border-bottom: 1px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+}
+.nav__list a:hover, .nav__list a.is-current { color: var(--fg); border-bottom-color: var(--line-strong); }
+
+/* ---------- Background stage ---------- */
+.stage {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  background: #000; pointer-events: none;
+}
+/* readability overlay + vignette above every scene */
+.stage::after {
+  content: ""; position: absolute; inset: 0; z-index: 5;
+  background:
+    radial-gradient(ellipse at 65% 50%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.6) 100%),
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+}
+
+.scene {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 1.6s var(--ease);
+  will-change: opacity;
+}
+.scene.is-active { opacity: 1; z-index: 2; }
+
+/* Fallback backgrounds: visible when an image is missing or still loading */
+.scene { background: #000; }
+.scene[data-scene-id="hero"] {
+  background:
+    radial-gradient(ellipse 120% 40% at 65% 108%, #3a3a3a 0, #151515 45%, transparent 72%),
+    radial-gradient(1px 1px at 18% 22%, #aaa, transparent), radial-gradient(1px 1px at 42% 12%, #888, transparent),
+    radial-gradient(1px 1px at 71% 28%, #999, transparent), radial-gradient(1px 1px at 88% 14%, #777, transparent),
+    radial-gradient(1px 1px at 30% 48%, #666, transparent), radial-gradient(1px 1px at 80% 55%, #666, transparent), #000;
+}
+.scene[data-scene-id="tech"] {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 64px),
+    radial-gradient(ellipse at 70% 40%, #262626, #000 70%);
+}
+.scene[data-scene-id="tesla"] {
+  background: linear-gradient(180deg, #000 0%, #101010 55%, #202020 72%, #050505 73%, #000 100%);
+}
+.scene[data-scene-id="spacex"] {
+  background: linear-gradient(180deg, #000 0%, #0d0d0d 50%, #2a2a2a 100%);
+}
+.scene[data-scene-id="ventures"] {
+  background: radial-gradient(ellipse at 75% 55%, #2c2c2c, #000 68%);
+}
+.scene[data-scene-id="closing"] {
+  background: radial-gradient(ellipse 100% 35% at 50% 105%, #303030, #0e0e0e 50%, #000 80%);
+}
+
+.scene__media {
+  position: absolute; inset: -6% 0;
+  transform: translate3d(0, var(--py), 0);
+  will-change: transform;
+}
+.scene__media img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: var(--pos, center);
+  /* restrained monochrome treatment */
+  filter: grayscale(1) contrast(1.05) brightness(0.78);
+  transform: scale(1.12);
+  transition: transform 10s var(--ease);
+}
+.scene.is-active .scene__media img { transform: scale(1); }
+.scene.no-image .scene__media { display: none; }
+
+/* ---------- Sections ---------- */
+.section {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; align-items: center;
+  padding: 8rem var(--pad) 6rem;
+  scroll-margin-top: 0;
+  /* scrim keeps text legible over any background; the right side stays open */
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.45) 55%, rgba(0, 0, 0, 0) 100%);
+}
+.section--tall { min-height: 130vh; min-height: 130svh; }
+
+.content { width: min(100%, 36rem); }
+.content--wide { width: min(100%, 54rem); }
+
+h1, h2, h3 { margin: 0; font-weight: 300; }
+h2 {
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  line-height: 1.04; letter-spacing: -0.025em;
+  margin-bottom: 1.75rem;
+}
+h3 { font-size: 1.25rem; font-weight: 400; margin-bottom: 0.75rem; letter-spacing: -0.005em; }
+p { margin: 0 0 1.1rem; }
+.lead { font-size: 1.3rem; line-height: 1.45; font-weight: 300; }
+.note { color: var(--muted); font-size: 0.9375rem; }
+
+/* ---------- Hero ---------- */
+.hero { align-items: flex-end; padding-bottom: clamp(4rem, 12vh, 8rem); }
+.content--hero { width: min(100%, 60rem); }
+.hero__name {
+  font-size: clamp(3.5rem, 12.5vw, 11rem);
+  font-weight: 200; line-height: 0.92; letter-spacing: -0.045em;
+  margin-bottom: 2rem;
+}
+.hero__title { font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.4; margin-bottom: 1.25rem; }
+.hero__intro { max-width: 34rem; color: var(--muted); }
+.scroll-cue {
+  display: inline-block; margin-top: 1.5rem; font-size: 0.875rem; color: var(--muted);
+  text-decoration: none; padding-bottom: 0.35rem; border-bottom: 1px solid var(--line-strong);
+  transition: color 0.3s, border-color 0.3s;
+}
+.scroll-cue:hover { color: var(--fg); border-color: var(--fg); }
+
+/* One orchestrated page-load moment */
+.rise { animation: rise 1.5s var(--ease) both; animation-delay: calc(0.3s + var(--i) * 0.2s); }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Content blocks ---------- */
+.plain { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+.plain li { padding: 0.9rem 0; border-top: 1px solid var(--line); }
+.plain li:last-child { border-bottom: 1px solid var(--line); }
+.plain strong, .facts strong { font-weight: 400; display: block; }
+.plain li, .facts li { color: var(--muted); }
+.plain strong, .facts strong { color: var(--fg); }
+
+.timeline { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
+.timeline li {
+  display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem;
+  padding: 0 0 1.75rem 1.75rem; position: relative;
+}
+.timeline li::before {
+  content: ""; position: absolute; left: -4px; top: 0.7em;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--fg);
+}
+.timeline time { font-variant-numeric: tabular-nums; font-size: 1.15rem; font-weight: 400; }
+.timeline p { margin: 0; color: var(--muted); max-width: 40rem; }
+
+.cards { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: 1rem; }
+.card { padding-top: 1.25rem; border-top: 1px solid var(--line-strong); transition: border-color 0.4s; }
+.card:hover { border-top-color: var(--fg); }
+.card p { color: var(--muted); font-size: 0.975rem; }
+
+.facts { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+.facts li { padding: 1.1rem 0; border-top: 1px solid var(--line); max-width: 44rem; }
+.facts li:last-child { border-bottom: 1px solid var(--line); }
+
+/* ---------- Footer ---------- */
+.footer {
+  position: relative; padding: 6rem var(--pad) 4rem;
+  background: rgba(0, 0, 0, 0.82); border-top: 1px solid var(--line);
+}
+.footer__inner { max-width: 44rem; }
+.footer h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+.refs { list-style: none; padding: 0; margin: 1.5rem 0; font-size: 0.9375rem; color: var(--muted); }
+.refs li { padding: 0.5rem 0; border-top: 1px solid var(--line); }
+.refs a { color: var(--fg); }
+.credits { font-size: 0.8125rem; color: var(--muted); }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+
+/* ---------- Reveal (only with JS) ---------- */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .nav { gap: 1rem; }
+  .nav__list { gap: 1.25rem; }
+}
+
+@media (max-width: 700px) {
+  body { font-size: 1rem; }
+  .section { padding: 6.5rem var(--pad) 4rem; background: rgba(0, 0, 0, 0.62); }
+  .section--tall { min-height: 110svh; }
+  .scene__media img { object-position: var(--pos-m, center); }
+  .timeline li { grid-template-columns: 1fr; gap: 0.15rem; padding-left: 1.25rem; }
+  .nav__brand { display: none; }
+  .lead { font-size: 1.15rem; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; }
+  .scene { transition: opacity 0.4s linear; }
+  .scene__media img, .scene.is-active .scene__media img { transform: none; transition: none; }
+  .scene__media { transform: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
